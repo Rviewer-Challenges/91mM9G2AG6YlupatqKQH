@@ -1,13 +1,11 @@
-import SidebarNav from '@/components/SidebarNav'
+import LeftSidebar from "@/components/left-sidebar";
+import MainComponent from "@/components/main-component";
+import RightSection from "@/components/right-section";
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="flex flex-col items-center justify-center">
-        <SidebarNav />
-      </div>
-    </main>
-  )
-}
+export const revalidate = 0;
 
-;
+const Home = async () => {
+  return <MainComponent />;
+};
+
+export default Home;

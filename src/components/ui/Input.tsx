@@ -1,68 +1,25 @@
-import React from 'react';
-import classNames from 'classnames';
+import * as React from "react"
 
-interface InputProps {
-    type?: string;
-    placeholder?: string;
-    value?: string;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    required?: boolean;
-    disabled?: boolean;
-    width?: string;
-    height?: string;
-    borderRadius?: string;
-    border?: string;
-    padding?: string;
-    fontSize?: string;
-    backgroundColor?: string;
-    color?: string;
-    margin?: string;
-}
+import { cn } from "@/lib/utils"
 
-const Input: React.FC<InputProps> = ({
-    type = 'text',
-    placeholder = '',
-    value = '',
-    onChange = () => {},
-    required = false,
-    disabled = false,
-    width = 'w-full',
-    height = 'h-10',
-    borderRadius = 'rounded-md',
-    border = 'border-gray-300',
-    padding = 'px-3',
-    fontSize = 'text-base',
-    backgroundColor = 'bg-white',
-    color = 'text-gray-700',
-    margin = 'my-2',
-}) => {
-    const inputClasses = classNames(
-        'outline-none',
-        'focus:ring-2',
-        'focus:ring-blue-500',
-        'focus:border-transparent',
-        width,
-        height,
-        borderRadius,
-        border,
-        padding,
-        fontSize,
-        backgroundColor,
-        color,
-        margin
-    );
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
 
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, ...props }, ref) => {
     return (
-        <input
-            type={type}
-            placeholder={placeholder}
-            value={value}
-            onChange={onChange}
-            required={required}
-            disabled={disabled}
-            className={inputClasses}
-        />
-    );
-};
+      <input
+        type={type}
+        className={cn(
+          "flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Input.displayName = "Input"
 
-export default Input;
+export { Input }
